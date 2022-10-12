@@ -48,7 +48,7 @@ docker-compose up -d
 
 2 working Sparkmagic kernels are already configured, one for pyspark, one for spark-scala.\
 (didn't include spark 3 for the moment)\
-Try this:\
+Try this:
 
 ```bash
 %%info
