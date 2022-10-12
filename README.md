@@ -145,5 +145,5 @@ In the image, it will end up in /etc/security/keytabs
 Everything is handled.\
 Persisted folder is
 ```bash
-__conf-jupyterlab-3.4.8-USER/sandbox/
+__conf-jupyterlab-3.4.8-USER/sandbox/notebook
 ```
