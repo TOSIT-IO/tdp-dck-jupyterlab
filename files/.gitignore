@@ -1,0 +1,11 @@
+################
+# Exclude list #
+################
+
+hosts
+krb5.conf
+*.log
+*.tar
+*.tgz
+*.tar.gz
+*.zip

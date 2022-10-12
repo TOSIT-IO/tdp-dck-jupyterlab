@@ -1,0 +1,16 @@
+sparkmagic
+nbconvert
+pywebhdfs
+wordcloud
+xgboost
+pipreqs
+fastparquet
+ruptures
+gensim
+nltk
+spacy
+opencv
+pymc3
+pywavelets
+luigi
+pyjwt

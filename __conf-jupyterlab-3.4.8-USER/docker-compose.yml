@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  "sandbox":
+     image: "jupyterlab:3.4.8-tdp-v0"
+     ports:
+       - "8181:8181"
+     volumes:
+       - "./sandbox/conf-nginx:/etc/nginx/"
+       - "./sandbox/data:/data"
+       - "./sandbox/notebook:/persisted_notebook"
+       - "./sandbox/keytabs:/etc/security/keytabs"
+     container_name: jupyterlab_3.4.8_tdp_USER
