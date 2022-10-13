@@ -4,21 +4,22 @@
 
 Get Hadoop, hive, hbase and spark2 confs (didn't include spark 3 for the moment)
 ```bash
+CURRENT_BASE_DIR=$(echo $PWD)
 cd ../tdp-getting-started
-vagrant scp edge-01.tdp:/etc/hadoop/conf/* ../tdp-dck-jupyterlab/files/hadoop/
-vagrant scp edge-01.tdp:/etc/hbase/conf/* ../tdp-dck-jupyterlab/files/hbase/
-vagrant scp edge-01.tdp:/etc/hive/conf/* ../tdp-dck-jupyterlab/files/hive/
-vagrant scp edge-01.tdp:/etc/spark/conf/* ../tdp-dck-jupyterlab/files/spark/
+vagrant scp edge-01.tdp:/etc/hadoop/conf/* ${CURRENT_BASE_DIR}/files/hadoop/
+vagrant scp edge-01.tdp:/etc/hbase/conf/* ${CURRENT_BASE_DIR}/files/hbase/
+vagrant scp edge-01.tdp:/etc/hive/conf/* ${CURRENT_BASE_DIR}/files/hive/
+vagrant scp edge-01.tdp:/etc/spark/conf/* ${CURRENT_BASE_DIR}/files/spark/
 ```
 Get the hosts and kerberos files of your TDP cluster
 ```bash
-vagrant scp edge-01.tdp:/etc/hosts ../tdp-dck-jupyterlab/files/hosts
-vagrant scp edge-01.tdp:/etc/krb5.conf ../tdp-dck-jupyterlab/files/krb5.conf
-vagrant scp edge-01.tdp:/home/tdp_user/tdp_user.keytab ../tdp-dck-jupyterlab/__conf-jupyterlab-3.4.8-USER/sandbox/keytabs/tdp_user.keytab
+vagrant scp edge-01.tdp:/etc/hosts ${CURRENT_BASE_DIR}/files/hosts
+vagrant scp edge-01.tdp:/etc/krb5.conf ${CURRENT_BASE_DIR}/files/krb5.conf
+vagrant scp edge-01.tdp:/home/tdp_user/tdp_user.keytab ${CURRENT_BASE_DIR}/__conf-jupyterlab-3.4.8-USER/sandbox/keytabs/tdp_user.keytab
 ```
 Create a tarball:
 ```bash
-cd ../tdp-dck-zeppelin/files
+cd ${CURRENT_BASE_DIR}/files
 tar cvzf clients-config.tar.gz hadoop hbase hive spark
 ```
 
@@ -31,27 +32,42 @@ livy.server.yarn.app-lookup-timeout=300s
 livy.rsc.server.connect.timeout=200s
 ```
 
-## Build this Jupyterlab Docker image ##
+## Build this Zeppelin Docker image ##
 
 ```bash
-./build-jupyterlab-for-tdp.sh
+cd ${CURRENT_BASE_DIR}
+./build-zeppelin-for-tdp.sh
 ```
 
-## Start Jupyterlab ##
+## Start zeppelin ##
 
 ```bash
 cd __conf-jupyterlab-3.4.8-USER/sandbox/
 docker-compose up -d
 ```
 
+## Open zeppelin ##
+
+https://localhost:8181
+
 ## Test ##
 
-2 working Sparkmagic kernels are already configured, one for pyspark, one for spark-scala.\
+2 working Sparkmagic kernels are already configured to interract with TDP,\
+one for pyspark (PySpark-Sparkmagic), one for spark-scala (Spark-Sparkmagic).\
 (didn't include spark 3 for the moment)\
-Try this:
+Try the kerbel called PySpark-Sparkmagic
 
 ```bash
 %%info
+```
+
+```bash
+%%configure -f
+{"name":"SparkMagic", "queue": "default", "executorCores":1}
+```
+
+```bash
+%lsmagic
 ```
 
 ```bash
@@ -75,6 +91,8 @@ df = spark.createDataFrame(data=data, schema = columns)
 ```bash
 df.show
 ```
+
+All other kernels are working fine, but with local ressources.
 
 ## TDP connection ##
 
