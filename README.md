@@ -89,7 +89,7 @@ df = spark.createDataFrame(data=data, schema = columns)
 ```
 
 ```bash
-df.show
+df.show()
 ```
 
 All other kernels are working fine, but with local ressources.
