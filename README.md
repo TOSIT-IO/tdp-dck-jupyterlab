@@ -32,21 +32,21 @@ livy.server.yarn.app-lookup-timeout=300s
 livy.rsc.server.connect.timeout=200s
 ```
 
-## Build this Zeppelin Docker image ##
+## Build this Jupyterlab Docker image ##
 
 ```bash
 cd ${CURRENT_BASE_DIR}
-./build-zeppelin-for-tdp.sh
+./build-Jupyterlab-for-tdp.sh
 ```
 
-## Start zeppelin ##
+## Start Jupyterlab ##
 
 ```bash
 cd __conf-jupyterlab-3.4.8-USER/sandbox/
 docker-compose up -d
 ```
 
-## Open zeppelin ##
+## Open Jupyterlab ##
 
 https://localhost:8181
 
