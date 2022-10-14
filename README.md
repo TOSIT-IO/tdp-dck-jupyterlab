@@ -36,13 +36,47 @@ livy.rsc.server.connect.timeout=200s
 
 ```bash
 cd ${CURRENT_BASE_DIR}
-./build-Jupyterlab-for-tdp.sh
+./build-jupyterlab-for-tdp.sh
 ```
 
 ## Start Jupyterlab ##
 
 ```bash
 cd __conf-jupyterlab-3.4.8-USER/sandbox/
+docker-compose up -d
+```
+Wait 2 minutes and stop le Jupyterlab
+```bash
+docker-compose down
+```
+Edit the sparkmagic config file
+```bash
+vim sandbox/notebook/.sparkmagic/config.json
+```
+Re-configure sparkmagic
+```bash
+  "kernel_python_credentials" : {
+    "username": "",
+    "password": "",
+    "url": "https://edge-01.tdp:8998",
+    "auth": "Kerberos"
+  },
+
+  "kernel_scala_credentials" : {
+    "username": "",
+    "password": "",
+    "url": "https://edge-01.tdp:8998",
+    "auth": "Kerberos"
+  },
+  "kernel_r_credentials": {
+    "username": "",
+    "password": "",
+    "url": "https://edge-01.tdp:8998",
+    "auth": "Kerberos"
+  },
+```
+Restart Jupyterlab
+```bash
 docker-compose up -d
 ```
 
