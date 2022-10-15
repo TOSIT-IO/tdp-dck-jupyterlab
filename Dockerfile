@@ -201,7 +201,6 @@ COPY files/hosts /etc/hosts
 COPY files/krb5.conf /etc/krb5.conf
 COPY files/clients-config.tar.gz clients-config.tar.gz 
 COPY files/start.me.up.before.you.go.go.sh /home/jovyan/start.me.up.before.you.go.go.sh
-COPY files/sparkmagic.config.tdp.json /home/jovyan/.sparkmagic/config.json
 COPY files/sparkmagic.kernel.json /usr/local/share/jupyter/kernels/sparkmagic/kernel.json
 #COPY files/sparkrmagic.kernel.json /usr/local/share/jupyter/kernels/sparkrmagic/kernel.json
 COPY files/pysparkmagic.kernel.json /usr/local/share/jupyter/kernels/pysparkmagic/kernel.json
