@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:latest
+FROM jupyter/scipy-notebook:python-3.9.13
 
 # Fix DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -140,37 +140,19 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 USER ${NB_UID}
 
 # R packages including IRKernel which gets installed globally.
-RUN mamba install --quiet --yes \
-    'r-base' \
-    'r-ggplot2' \
-    'r-irkernel' \
-    'r-rcurl' \
-    'r-sparklyr' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+# RUN mamba install --quiet --yes \
+#     'r-base' \
+#     'r-ggplot2' \
+#     'r-irkernel' \
+#     'r-rcurl' \
+#     'r-sparklyr' && \
+#     mamba clean --all -f -y && \
+#     fix-permissions "${CONDA_DIR}" && \
+#     fix-permissions "/home/${NB_USER}"
 
-# Install Fat requirements # Method 3
-COPY files/fat_requirements_part1.txt /fat_requirements_part1.txt
-RUN mamba install --quiet --yes --file /fat_requirements_part1.txt && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-COPY files/fat_requirements_part2.txt /fat_requirements_part2.txt
-RUN mamba install --quiet --yes --file /fat_requirements_part2.txt && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-COPY files/fat_requirements_part3.txt /fat_requirements_part3.txt
-RUN mamba install --quiet --yes --file /fat_requirements_part3.txt && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-COPY files/fat_requirements_part4.txt /fat_requirements_part4.txt
-RUN mamba install --quiet --yes --file /fat_requirements_part4.txt && \
+# Install Fat requirements
+COPY files/fat_requirements.txt /fat_requirements.txt
+RUN mamba install --quiet --yes --file /fat_requirements.txt && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

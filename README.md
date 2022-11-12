@@ -13,6 +13,8 @@ vagrant scp edge-01.tdp:/etc/spark/conf/* ${CURRENT_BASE_DIR}/files/spark/
 ```
 Get the hosts and kerberos files of your TDP cluster
 ```bash
+cp files/certs/root.pem ${CURRENT_BASE_DIR}/files/root.pem
+vagrant scp edge-01.tdp:/etc/ssl/certs/truststore.jks ${CURRENT_BASE_DIR}/files/truststore.jks
 vagrant scp edge-01.tdp:/etc/hosts ${CURRENT_BASE_DIR}/files/hosts
 vagrant scp edge-01.tdp:/etc/krb5.conf ${CURRENT_BASE_DIR}/files/krb5.conf
 vagrant scp edge-01.tdp:/home/tdp_user/tdp_user.keytab ${CURRENT_BASE_DIR}/__conf-jupyterlab-3.4.8-USER/sandbox/keytabs/tdp_user.keytab
@@ -49,22 +51,6 @@ docker-compose up -d
 ## Open Jupyterlab ##
 
 https://localhost:8181
-
-## Restore Sparkmagic conf ##
-
-Open a console in Jupyterlab and run the following command
-```bash
-cp /data/sparkmagic.config.tdp.json /home/jovyan/.sparkmagic/config.json
-cp /data/jupyter_notebook_config.tdp.py /home/jovyan/.jupyter/jupyter_notebook_config.py
-```
-
-## Restart Jupyterlab ##
-
-```bash
-cd __conf-jupyterlab-3.4.8-USER/sandbox/
-docker-compose down
-docker-compose up -d
-```
 
 ## Test ##
 
